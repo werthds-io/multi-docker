@@ -3,8 +3,7 @@ serivces:
   - docker
 
 before_install:
-  - docker build -t werthds/react-test -f ./client/Dockerfile.dev
-  - context ./client
+  - docker build -t werthds/react-test -f ./client/Dockerfile.dev ./client
 
 script:
   - docker run -e CI=true wertds/react-test npm test
