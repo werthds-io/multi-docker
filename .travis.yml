@@ -6,7 +6,7 @@ before_install:
   - docker build -t werthds/react-test -f ./client/Dockerfile.dev ./client
 
 script:
-  - docker run -e CI=true wertds/react-test npm test
+  - docker run -e CI=true werthds/react-test npm test
 
 after_success:
   - docker build -t werthds/multi-client ./client
