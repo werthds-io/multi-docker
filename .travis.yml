@@ -19,4 +19,4 @@ after_success:
   - docker push werthds/multi-client 
   - docker push werthds/multi-nginx
   - docker push werthds/multi-server
-  - docker push werthds/multi-client
+  - docker push werthds/multi-worker
