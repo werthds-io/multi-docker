@@ -1,0 +1,23 @@
+sudo: required
+serivces:
+  - docker
+
+before_install:
+  - docker build -t werthds/react-test -f ./client/Dockerfile.dev
+  - context ./client
+
+script:
+  - docker run -e CI=true wertds/react-test npm test
+
+after_success:
+  - docker build -t werthds/multi-client ./client
+  - docker build -t werthds/multi-nginx ./nginx
+  - docker build -t werthds/multi-server ./server
+  - docker build -t werthds/multi-worker ./worker
+  # log in to docker cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin 
+  # push images to dockerhub
+  - docker push werthds/multi-client 
+  - docker push werthds/multi-nginx
+  - docker push werthds/multi-server
+  - docker push werthds/multi-client
