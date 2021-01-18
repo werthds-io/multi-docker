@@ -1,5 +1,5 @@
-sudo: required
-serivces:
+language: default
+services:
   - docker
 
 before_install:
@@ -20,4 +20,3 @@ after_success:
   - docker push werthds/multi-nginx
   - docker push werthds/multi-server
   - docker push werthds/multi-worker
-  
