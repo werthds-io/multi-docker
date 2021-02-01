@@ -1,4 +1,4 @@
-language: default
+language: ruby
 services:
   - docker
 
@@ -20,3 +20,15 @@ after_success:
   - docker push werthds/multi-nginx
   - docker push werthds/multi-server
   - docker push werthds/multi-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multi-docker
+  environment: Multidocker-env
+  bucket_name: elasticbeanstalk-us-east-2-547333303971
+  bucket_path: docker-multi
+  on:
+    branch: main
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
